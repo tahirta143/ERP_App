@@ -1,35 +1,38 @@
 import 'package:flutter/material.dart';
-import 'add_complaints.dart';
+import 'add_complaint_tostaff.dart';
 
-class ComplaintsList extends StatefulWidget {
-  const ComplaintsList({super.key});
+class StaffComplaintsList extends StatefulWidget {
+  const StaffComplaintsList({super.key});
 
   @override
-  State<ComplaintsList> createState() => _ComplaintsListState();
+  State<StaffComplaintsList> createState() => _StaffComplaintsListState();
 }
 
-class _ComplaintsListState extends State<ComplaintsList> {
+class _StaffComplaintsListState extends State<StaffComplaintsList> {
   TextEditingController searchController = TextEditingController();
 
   // Dummy complaint data
   List<Map<String, dynamic>> complaintList = [
     {
-      "id": "Complain001",
+      "id": "Complaint001",
       "customer": "Ali Khan",
       "products": ["Website", "Mobile App", "ERP Module"],
-      "date": "2025-12-22"
+      "date": "2025-12-22",
+      "assign":"Assign001"
     },
     {
-      "id": "Complain002",
-      "customer": "Sara Malik",
-      "products": ["Ecommerce Site"],
-      "date": "2025-12-21"
+      "id": "Complaint002",
+      "customer": "Ali",
+      "products": ["Mobile App"],
+      "date": "2025-12-21",
+      "assign":"Assign002"
     },
     {
-      "id": "Complain003",
-      "customer": "Usman Shah",
-      "products": ["Mobile App", "ERP Module"],
-      "date": "2025-12-20"
+      "id": "Complaint003",
+      "customer": "Usman",
+      "products": ["Mobile App", "Odoo ERP"],
+      "date": "2025-12-20",
+      "assign":"Assign003"
     },
   ];
 
@@ -78,7 +81,7 @@ class _ComplaintsListState extends State<ComplaintsList> {
             onPressed: () => Navigator.pop(context),
           ),
           title: const Text(
-            "Complaints List",
+            "Assign Complaints to Staff List",
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -97,14 +100,14 @@ class _ComplaintsListState extends State<ComplaintsList> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text(
-                  "Complaints",
+                  "Assign Complaints to Staff",
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 ElevatedButton.icon(
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const AddComplaints()),
+                      MaterialPageRoute(builder: (context) => const AddComplaintsTostaff()),
                     );
                   },
                   icon: const Icon(Icons.add),
@@ -168,12 +171,25 @@ class _ComplaintsListState extends State<ComplaintsList> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           // Date
-                          Text(
-                            complaint["date"] ?? "",
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.grey[600],
-                            ),
+                          Row(
+                            spacing: 250,
+                            children: [
+                              Text(
+                                complaint["date"] ?? "",
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.grey[600],
+                                ),
+                              ),
+                              Text(
+                                complaint["assign"] ?? "",
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey[900],
+                                ),
+                              ),
+                            ],
                           ),
                           const SizedBox(height: 8),
 

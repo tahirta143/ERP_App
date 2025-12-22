@@ -1,35 +1,57 @@
+import 'package:erp/screens/complaints/functionality/complaint_attended/Add_complaint_attended.dart';
 import 'package:flutter/material.dart';
-import 'add_complaints.dart';
 
-class ComplaintsList extends StatefulWidget {
-  const ComplaintsList({super.key});
+class ComplaintAttendedList extends StatefulWidget {
+  const ComplaintAttendedList({super.key});
 
   @override
-  State<ComplaintsList> createState() => _ComplaintsListState();
+  State<ComplaintAttendedList> createState() => _ComplaintAttendedListState();
 }
 
-class _ComplaintsListState extends State<ComplaintsList> {
+class _ComplaintAttendedListState extends State<ComplaintAttendedList> {
   TextEditingController searchController = TextEditingController();
 
-  // Dummy complaint data
+  // Updated complaint data
   List<Map<String, dynamic>> complaintList = [
     {
-      "id": "Complain001",
-      "customer": "Ali Khan",
+      "id": "C1001",
+      "customer": "Ahmed Ali",
       "products": ["Website", "Mobile App", "ERP Module"],
-      "date": "2025-12-22"
+      "date": "2025-12-22",
+      "assign": "Staff001"
     },
     {
-      "id": "Complain002",
-      "customer": "Sara Malik",
-      "products": ["Ecommerce Site"],
-      "date": "2025-12-21"
+      "id": "C1002",
+      "customer": "Sara Khan",
+      "products": ["Ecommerce Site", "Mobile App"],
+      "date": "2025-12-21",
+      "assign": "Staff002"
     },
     {
-      "id": "Complain003",
+      "id": "C1003",
       "customer": "Usman Shah",
-      "products": ["Mobile App", "ERP Module"],
-      "date": "2025-12-20"
+      "products": ["Mobile App", "Odoo ERP", "CRM Module"],
+      "date": "2025-12-20",
+      "assign": "Staff003"
+    },
+    {
+      "id": "C1004",
+      "customer": "Ali Raza",
+      "products": ["ERP Module"],
+      "date": "2025-12-19",
+      "assign": "Staff004"
+    }, {
+      "id": "C1004",
+      "customer": "Ali Raza",
+      "products": ["ERP Module"],
+      "date": "2025-12-19",
+      "assign": "Staff004"
+    }, {
+      "id": "C1004",
+      "customer": "Ali Raza",
+      "products": ["ERP Module"],
+      "date": "2025-12-19",
+      "assign": "Staff004"
     },
   ];
 
@@ -78,7 +100,7 @@ class _ComplaintsListState extends State<ComplaintsList> {
             onPressed: () => Navigator.pop(context),
           ),
           title: const Text(
-            "Complaints List",
+            "Complaint Attended List",
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -97,14 +119,14 @@ class _ComplaintsListState extends State<ComplaintsList> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text(
-                  "Complaints",
+                  " Complaint Attended",
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 ElevatedButton.icon(
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const AddComplaints()),
+                      MaterialPageRoute(builder: (context) => const AddComplaintAttended()),
                     );
                   },
                   icon: const Icon(Icons.add),
@@ -167,13 +189,26 @@ class _ComplaintsListState extends State<ComplaintsList> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // Date
-                          Text(
-                            complaint["date"] ?? "",
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.grey[600],
-                            ),
+                          // Date + Assigned Staff
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                complaint["date"] ?? "",
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.grey[600],
+                                ),
+                              ),
+                              Text(
+                                complaint["assign"] ?? "",
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey[900],
+                                ),
+                              ),
+                            ],
                           ),
                           const SizedBox(height: 8),
 
@@ -192,7 +227,6 @@ class _ComplaintsListState extends State<ComplaintsList> {
                               ),
                               Row(
                                 children: [
-                                  // Edit Button
                                   Container(
                                     width: 28,
                                     height: 28,
@@ -208,13 +242,10 @@ class _ComplaintsListState extends State<ComplaintsList> {
                                         color: Colors.blue,
                                         size: 18,
                                       ),
-                                      onPressed: () {
-                                        // Edit complaint logic
-                                      },
+                                      onPressed: () {},
                                     ),
                                   ),
                                   const SizedBox(width: 6),
-                                  // Delete Button
                                   Container(
                                     width: 28,
                                     height: 28,
@@ -230,9 +261,7 @@ class _ComplaintsListState extends State<ComplaintsList> {
                                         color: Colors.red,
                                         size: 18,
                                       ),
-                                      onPressed: () {
-                                        // Delete complaint logic
-                                      },
+                                      onPressed: () {},
                                     ),
                                   ),
                                 ],

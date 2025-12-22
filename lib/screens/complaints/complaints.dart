@@ -1,8 +1,11 @@
+import 'package:erp/screens/complaints/functionality/complaint_attended/complaint_attended_list.dart';
+import 'package:erp/screens/complaints/setup/complaints_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../widgets/erpcards.dart';
 import '../../widgets/summarycards.dart';
+import 'functionality/staff_complaints_list.dart';
 
 class Complaints extends StatefulWidget {
   const Complaints({super.key});
@@ -187,22 +190,20 @@ class _ComplaintsState extends State<Complaints> {
         childAspectRatio: 0.95,
         children: [
           ErpCard(
-            title: "Launch New Complaint",
-            icon: Icons.report_problem,
-            color: Colors.blue,
-            onTap: () {},
-          ),
-          ErpCard(
             title: "Assigned Complaint to Staff",
             icon: Icons.assignment_ind,
             color: Colors.green,
-            onTap: () {},
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>StaffComplaintsList()));
+            },
           ),
           ErpCard(
-            title: "Complaint Resolved",
+            title: "Complaint Attended",
             icon: Icons.check_circle,
             color: Colors.orange,
-            onTap: () {},
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>ComplaintAttendedList()));
+            },
           ),
         ],
       ),
@@ -261,7 +262,7 @@ class _ComplaintsState extends State<Complaints> {
             title: "Create Complaints",
             icon: Icons.report_problem,
             color: Colors.green,
-            onTap: () {},
+            onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context)=>ComplaintsList()));},
           ),
         ],
       ),

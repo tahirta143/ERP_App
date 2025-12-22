@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class FloatingInputField extends StatelessWidget {
-  final String label;
-  final String? hintText;
+  final String? label;
+  final String hintText;
   final IconData? icon;
   final TextEditingController? controller;
   final TextInputType keyboardType;
@@ -12,8 +12,8 @@ class FloatingInputField extends StatelessWidget {
 
   const FloatingInputField({
     super.key,
-    required this.label,
-    this.hintText,
+    this.label,
+    required this.hintText,
     this.icon,
     this.controller,
     this.keyboardType = TextInputType.text,
@@ -49,6 +49,7 @@ class FloatingInputField extends StatelessWidget {
           obscureText: obscureText,
           decoration: InputDecoration(
             labelText: label,
+            hintText: hintText,
 
             prefixIcon: icon != null
                 ? Icon(icon, size: screenWidth * 0.06, color: Colors.grey)
