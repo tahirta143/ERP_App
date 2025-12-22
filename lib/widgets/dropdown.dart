@@ -1,56 +1,63 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustomDropdownField extends StatelessWidget {
-  final String label;
+
   final String hint;
   final IconData icon;
-  final String? value;
   final List<String> items;
+  final String? value;
+  final title;
   final ValueChanged<String?> onChanged;
 
   const CustomDropdownField({
     super.key,
-    required this.label,
+
     required this.hint,
     required this.icon,
     required this.items,
-
-    required this.onChanged,
-    this.value,
+    required this.value,
+    required this.onChanged, this.title,
   });
+
+
+
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          label,
-          style: const TextStyle(
-            fontSize: 13,
-            fontWeight: FontWeight.w600,
+        Padding(
+          padding: const EdgeInsets.all(8),
+          child: Text(
+            title,
+            style: TextStyle(
+              fontSize: screenWidth * 0.035, // responsive font size
+              fontWeight: FontWeight.bold,
+              color: Colors.grey[800],
+            ),
           ),
         ),
-        const SizedBox(height: 6),
         DropdownButtonFormField<String>(
           value: value,
-          hint: Text(hint),
           items: items
               .map(
-                (e) => DropdownMenuItem(
-              value: e,
-              child: Text(e),
+                (item) => DropdownMenuItem<String>(
+              value: item,
+              child: Text(item),
             ),
           )
               .toList(),
           onChanged: onChanged,
+
           decoration: InputDecoration(
+            hintText: hint,
             prefixIcon: Icon(icon),
-            filled: true,
-            fillColor: Colors.white,
             border: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.blue),
               borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide.none,
             ),
           ),
         ),

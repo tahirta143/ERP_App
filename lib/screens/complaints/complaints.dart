@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../widgets/erpcards.dart';
+import '../../widgets/summarycards.dart';
 
 class Complaints extends StatefulWidget {
   const Complaints({super.key});
@@ -13,6 +14,7 @@ class Complaints extends StatefulWidget {
 class _ComplaintsState extends State<Complaints> {
   int selectedTab = 0;
   final List<String> tabs = ["Functionalities", "Reports", "Setups"];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +58,50 @@ class _ComplaintsState extends State<Complaints> {
       // ===================== BODY =====================
       body: Column(
         children: [
-          const SizedBox(height: 60),
+          Padding(
+            padding: const EdgeInsets.all(14),
+            child: GridView.count(
+              crossAxisCount: 2,
+              mainAxisSpacing: 16,
+              crossAxisSpacing: 16,
+              childAspectRatio: 1.3,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              children: [
+                SummaryCard(
+                  title: "Total Complaints",
+                  value: "12",
+                  icon: Icons.report_problem,
+                  index: 4,
+                  onTap: () {},
+                ),
+                SummaryCard(
+                  title: "Pending Complaints",
+                  value: "5",
+                  icon: Icons.pending_actions,
+                  index: 2,
+                  onTap: () {},
+                ),
+                SummaryCard(
+                  title: "Solved Complaints",
+                  value: "4",
+                  icon: Icons.check_circle,
+                  index: 1,
+                  onTap: () {},
+                ),
+                SummaryCard(
+                  title: "Add Complaints",
+                  value: "15",
+                  icon: Icons.add_circle,
+                  index: 8,
+                  onTap: () {},
+                ),
+              ],
+            ),
+          ),
+
+          const SizedBox(height: 20),
+
           // ===================== ROUNDED TABS =====================
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 18),
@@ -136,7 +181,7 @@ class _ComplaintsState extends State<Complaints> {
     return Padding(
       padding: const EdgeInsets.all(16),
       child: GridView.count(
-        crossAxisCount: columns, // same style as dashboard
+        crossAxisCount: columns,
         mainAxisSpacing: 12,
         crossAxisSpacing: 12,
         childAspectRatio: 0.95,
@@ -148,7 +193,7 @@ class _ComplaintsState extends State<Complaints> {
             onTap: () {},
           ),
           ErpCard(
-            title: "Assigned /Complaint to Staff",
+            title: "Assigned Complaint to Staff",
             icon: Icons.assignment_ind,
             color: Colors.green,
             onTap: () {},
@@ -159,8 +204,6 @@ class _ComplaintsState extends State<Complaints> {
             color: Colors.orange,
             onTap: () {},
           ),
-
-
         ],
       ),
     );
@@ -185,13 +228,11 @@ class _ComplaintsState extends State<Complaints> {
             onTap: () {},
           ),
           ErpCard(
-            title: "Complaints against customer",
+            title: "Complaints Against Customer",
             icon: Icons.person_2,
             color: Colors.green,
             onTap: () {},
           ),
-
-
         ],
       ),
     );
@@ -217,17 +258,13 @@ class _ComplaintsState extends State<Complaints> {
             onTap: () {},
           ),
           ErpCard(
-            title: "Complaints Status",
-            icon: Icons.calculate,
+            title: "Create Complaints",
+            icon: Icons.report_problem,
             color: Colors.green,
             onTap: () {},
           ),
-
-
         ],
       ),
     );
   }
 }
-
-

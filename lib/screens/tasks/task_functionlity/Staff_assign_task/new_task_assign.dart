@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../widgets/app_buttons.dart';
 import '../../../../widgets/app_textfields.dart';
+import '../../../../widgets/dropdown.dart';
 import '../../../../widgets/start_end_date_picker.dart';
 
 class AddNewTaskStaff extends StatefulWidget {
@@ -13,6 +14,33 @@ class AddNewTaskStaff extends StatefulWidget {
 }
 
 class _AddNewTaskState extends State<AddNewTaskStaff> {
+  List<String> taskTypes = [
+    "Tech Solutions Inc.",
+    "Green Energy Corp.",
+    "Urban Logistic Ltd.",
+  ];
+  // Departments
+  List<String> departments = [
+    "IT",
+    "HR",
+    "Finance",
+    "Sales",
+  ];
+
+// Employees mapped to department
+  List<String> staff = [
+    "Shehbaz",
+    "Ali",
+    "Tahir",
+    "Iman",
+  ];
+
+  String? selectedDepartment;
+  String? selectedEmployee;
+
+  String? selectedTaskType;
+
+  TextEditingController taskNameController = TextEditingController();
   TextEditingController startDateController = TextEditingController();
   TextEditingController endDateController = TextEditingController();
   @override
@@ -62,6 +90,18 @@ class _AddNewTaskState extends State<AddNewTaskStaff> {
                 icon: Icons.task_outlined,
                 title: 'Task Name',
               ),
+              CustomDropdownField(
+                title: "Task Assigned",
+                hint: "Select a Customer",
+                icon: Icons.work_outline,
+                items: taskTypes,            // 👈 LIST DATA
+                value: selectedTaskType,     // 👈 SELECTED VALUE
+                onChanged: (value) {
+                  setState(() {
+                    selectedTaskType = value;
+                  });
+                },
+              ),
 
               const SizedBox(height: 12),
               FloatingDateField(
@@ -69,11 +109,34 @@ class _AddNewTaskState extends State<AddNewTaskStaff> {
                 icon: Icons.date_range,
                 controller: startDateController, title: 'Start Date',
               ),
+
               const SizedBox(height: 12),
               FloatingDateField(
                 label: "End Date",
                 icon: Icons.date_range,
                 controller: endDateController, title: 'End Date',
+              ), CustomDropdownField(
+                title: "Department",
+                hint: "Select Department",
+                icon: Icons.work_outline,
+                items: departments,            // 👈 LIST DATA
+                value: selectedDepartment,     // 👈 SELECTED VALUE
+                onChanged: (value) {
+                  setState(() {
+                    selectedDepartment = value;
+                  });
+                },
+              ), CustomDropdownField(
+                title: "Staff",
+                hint: "Select Staff",
+                icon: Icons.work_outline,
+                items: staff,            // 👈 LIST DATA
+                value: selectedEmployee,     // 👈 SELECTED VALUE
+                onChanged: (value) {
+                  setState(() {
+                    selectedEmployee = value;
+                  });
+                },
               ),
 
               Padding(
@@ -91,7 +154,7 @@ class _AddNewTaskState extends State<AddNewTaskStaff> {
           ),
         ),
       ),
-      
+
     );
   }
 }
