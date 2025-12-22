@@ -57,7 +57,6 @@ class _AddNewTaskState extends State<AddNewTask> {
           child: Column(
             children: [
               const FloatingInputField(
-                label: "Task",
                 hintText: "Enter Task name ",
                 icon: Icons.task_outlined,
                 title: 'Task Name',
