@@ -1,7 +1,8 @@
-import 'package:erp/screens/stock/stock.dart';
+
+import 'package:erp/screens/tasks/reports/task_progress.dart';
+import 'package:erp/screens/tasks/task_functionlity/Staff_assign_task/assign_staff_task.dart';
 import 'package:erp/screens/tasks/task_functionlity/list_of_staff/staff_list_screen.dart';
 import 'package:erp/screens/tasks/task_functionlity/list_of_tasks/task_list.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../widgets/erpcards.dart';
@@ -108,7 +109,7 @@ class _TasksdashboardState extends State<Tasksdashboard> {
                     icon: Icons.shopping_cart,
                     index: 8,
                     onTap: () {
-                      // Navigate to Purchase Screen
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>TaskListScreen()));
 
                     },
                   ),
@@ -203,24 +204,12 @@ class _TasksdashboardState extends State<Tasksdashboard> {
         childAspectRatio: 0.95,
         children: [
           ErpCard(
-            title: "List of Projects",
-            icon: Icons.filter_list,
-            color: Colors.blue,
-            onTap: () {},
-          ),
-          ErpCard(
-            title: "List of Tasks",
-            icon: Icons.task_rounded,
+            title: "Staff Assigned Task",
+            icon: Icons.assignment_ind, // assigned to staff
             color: Colors.green,
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>TaskListScreen()));
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>TaskAssigneScreen()));
             },
-          ),
-          ErpCard(
-            title: "List of Staff",
-            icon: Icons.people,
-            color: Colors.orange,
-            onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context)=>StaffListScreen()));},
           ),
         ],
       ),
@@ -240,21 +229,21 @@ class _TasksdashboardState extends State<Tasksdashboard> {
         childAspectRatio: 0.95,
         children: [
           ErpCard(
-            title: "Tasks Schedule",
-            icon: Icons.timer,
+            title: "Tasks Progress",
+            icon: Icons.timeline, // shows progress/timeline
             color: Colors.blue,
-            onTap: () {},
+            onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context)=>TaskProgress()));},
           ),
           ErpCard(
-            title: "Tasks Assigned to Staff",
-            icon: Icons.person_2,
+            title: "Task Completed",
+            icon: Icons.assignment_ind, // assigned to staff
             color: Colors.green,
             onTap: () {},
           ),
           ErpCard(
-            title: "Tasks Completion Note",
-            icon: Icons.people,
-            color: Colors.orange,
+            title: "Delayed Tasks",
+            icon: Icons.schedule, // shows delay or time
+            color: Colors.deepOrange,
             onTap: () {},
           ),
         ],
@@ -274,7 +263,22 @@ class _TasksdashboardState extends State<Tasksdashboard> {
         mainAxisSpacing: 12,
         crossAxisSpacing: 12,
         childAspectRatio: 0.95,
-        children: [],
+        children: [
+          ErpCard(
+            title: "List of Tasks",
+            icon: Icons.task_rounded,
+            color: Colors.green,
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>TaskListScreen()));
+            },
+          ),
+          ErpCard(
+            title: "List of Staff",
+            icon: Icons.people,
+            color: Colors.orange,
+            onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context)=>StaffListScreen()));},
+          ),
+        ],
       ),
     );
   }

@@ -8,6 +8,7 @@ class FloatingInputField extends StatelessWidget {
   final TextInputType keyboardType;
   final bool obscureText;
   final String title;
+  final int? maxLines;
 
   const FloatingInputField({
     super.key,
@@ -17,7 +18,7 @@ class FloatingInputField extends StatelessWidget {
     this.controller,
     this.keyboardType = TextInputType.text,
     this.obscureText = false,
-    required this.title,
+    required this.title, this.maxLines,
   });
 
   @override
@@ -44,6 +45,7 @@ class FloatingInputField extends StatelessWidget {
         TextField(
           controller: controller,
           keyboardType: keyboardType,
+          maxLines: maxLines,
           obscureText: obscureText,
           decoration: InputDecoration(
             labelText: label,
@@ -51,7 +53,7 @@ class FloatingInputField extends StatelessWidget {
             prefixIcon: icon != null
                 ? Icon(icon, size: screenWidth * 0.06, color: Colors.grey)
                 : null,
-            floatingLabelBehavior: FloatingLabelBehavior.auto,
+            floatingLabelBehavior: FloatingLabelBehavior.always,
             floatingLabelStyle: TextStyle(
               color: Colors.blue, // Color when label floats
               fontWeight: FontWeight.bold,

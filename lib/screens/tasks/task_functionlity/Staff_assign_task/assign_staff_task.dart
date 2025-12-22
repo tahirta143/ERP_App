@@ -2,22 +2,24 @@ import 'package:erp/screens/tasks/task_functionlity/list_of_staff/add_new_staff.
 import 'package:erp/screens/tasks/task_functionlity/list_of_tasks/add_new_task.dart';
 import 'package:flutter/material.dart';
 
-class TaskListScreen extends StatefulWidget {
-  const TaskListScreen({super.key});
+import 'new_task_assign.dart';
+
+class TaskAssigneScreen extends StatefulWidget {
+  const TaskAssigneScreen({super.key});
 
   @override
-  State<TaskListScreen> createState() => _TaskListScreenState();
+  State<TaskAssigneScreen> createState() => _TaskListScreenState();
 }
 
-class _TaskListScreenState extends State<TaskListScreen> {
+class _TaskListScreenState extends State<TaskAssigneScreen> {
   TextEditingController searchController = TextEditingController();
 
   // Dummy staff data
   List<Map<String, String>> taskList = [
-    {"task": "website", "disk": "abcdefgjh"},
-    {"task": "mobile app", "disk": "hhfhhfh"},
-    {"task": "ecommerce website", "disk": "fghrv"},
-    {"task": "mobile app", "disk": "shshhs"},
+    {"Assign_Id":"Assign001","task": "website", "disk": "shahbaz"},
+    {"Assign_Id":"Assign002","task": "mobile app", "disk": "Tahir"},
+    {"Assign_Id":"Assign003","task": "ecommerce website", "disk": "Ali"},
+    {"Assign_Id":"Assign004","task": "mobile app", "disk": "Zain"},
   ];
 
   List<Map<String, String>> filteredList = [];
@@ -69,7 +71,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
             onPressed: () => Navigator.pop(context),
           ),
           title: const Text(
-            "Task List",
+            "Assigned Task To Staff",
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -90,7 +92,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text(
-                  "Task",
+                  "Assign Task",
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 ElevatedButton.icon(
@@ -98,7 +100,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
                     // Navigate to Add Staff Screen
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) =>AddNewTask()),
+                      MaterialPageRoute(builder: (context) =>AddNewTaskStaff()),
                     );
                   },
                   icon: const Icon(Icons.add),
@@ -162,12 +164,24 @@ class _TaskListScreenState extends State<TaskListScreen> {
                       ),
 
                       // ===== TASK NAME =====
-                      title: Text(
-                        task["task"] ?? "No Task",
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      title: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            task["Assign_Id"] ?? "No Task",
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            task["task"] ?? "No Task",
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
                       ),
 
                       // ===== TASK DISK =====
