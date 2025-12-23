@@ -1,4 +1,6 @@
 import 'package:erp/screens/complaints/functionality/complaint_attended/complaint_attended_list.dart';
+import 'package:erp/screens/complaints/reports/pending_complaints_list.dart';
+import 'package:erp/screens/complaints/reports/resolved_complaints.dart';
 import 'package:erp/screens/complaints/setup/complaints_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -225,14 +227,14 @@ class _ComplaintsState extends State<Complaints> {
           ErpCard(
             title: "Pending Complaints",
             icon: Icons.pending_actions,
-            color: Colors.blue,
-            onTap: () {},
+            color: Colors.orange,
+            onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context)=>PendingComplaintsList()));},
           ),
           ErpCard(
-            title: "Complaints Against Customer",
+            title: "Resolved Complaints",
             icon: Icons.person_2,
             color: Colors.green,
-            onTap: () {},
+            onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context)=>ResolvedComplaints()));},
           ),
         ],
       ),
