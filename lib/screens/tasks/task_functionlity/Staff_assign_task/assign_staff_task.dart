@@ -50,7 +50,7 @@ class _TaskListScreenState extends State<TaskAssigneScreen> {
       filteredList = tasks
           .where((task) =>
       task.task.toLowerCase().contains(query.toLowerCase()) ||
-          task.dist.toLowerCase().contains(query.toLowerCase()))
+          task.staff.toLowerCase().contains(query.toLowerCase()))
           .toList();
     });
   }
@@ -304,7 +304,7 @@ class _TaskListScreenState extends State<TaskAssigneScreen> {
                             children: [
                               Text(task.task),
                               Text(
-                                task.dist,
+                                task.staff,
                                 style: TextStyle(color: Colors.grey[600]),
                               ),
                             ],

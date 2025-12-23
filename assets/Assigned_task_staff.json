@@ -2,21 +2,21 @@
   {
     "assignid":"Assign001",
     "task": "Website",
-    "dist": "Shahbaz"
+    "staff": "Shahbaz"
   },
   {
     "assignid":"Assign002",
     "task": "ERP task complete",
-    "dist": "Gulfam"
+    "staff": "Gulfam"
   },
   {
     "assignid":"Assign003",
     "task": "Sandwich order",
-    "dist": "Zain"
+    "staff": "Zain"
   },
   {
     "assignid":"Assign004",
     "task": "fance account order",
-    "dist": "Eman"
+    "staff": "Eman"
   }
 ]

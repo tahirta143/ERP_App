@@ -1,19 +1,19 @@
 class AssignTaskStaffModel {
   final String assignid;
   final String task;
-  final String dist;
+  final String staff;
 
   AssignTaskStaffModel({
     required this.assignid,
     required this.task,
-    required this.dist,
+    required this.staff,
   });
 
   factory AssignTaskStaffModel.fromJson(Map<String, dynamic> json) {
     return AssignTaskStaffModel(
       assignid: json['assignid'] ?? '',
       task: json['task'] ?? json['name'] ?? '',
-      dist: json['dist'] ?? json['price'] ?? '',
+      staff: json['staff'] ?? json['price'] ?? '',
     );
   }
 }

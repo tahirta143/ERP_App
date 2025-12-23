@@ -27,4 +27,8 @@ class TaskassignstaffProvider with ChangeNotifier {
     _isLoading = false;
     notifyListeners();
   }
+  void addTask(AssignTaskStaffModel task) {
+    _assignTask.add(task);
+    notifyListeners();
+  }
 }

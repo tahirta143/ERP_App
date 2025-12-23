@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../../../Model/Task_model/Assign_task_staff_model.dart';
+import '../../../../provider/Task/TaskAssignStaff_provider.dart';
 import '../../../../widgets/app_buttons.dart';
 import '../../../../widgets/app_textfields.dart';
 import '../../../../widgets/dropdown.dart';
@@ -146,8 +149,19 @@ class _AddNewTaskState extends State<AddNewTaskStaff> {
                   icon: Icons.add,
                   color: Color(0xFF42A5F5),
                   onPressed: () {
-                    print("Add Staff button clicked");
+                    final provider =
+                    Provider.of<TaskassignstaffProvider>(context, listen: false);
+
+                    final newTask = AssignTaskStaffModel(
+                      assignid: "Assign00${provider.assignTask.length + 1}",
+                      task: taskNameController.text,
+                      staff: selectedEmployee ?? "",
+                    );
+
+                    provider.addTask(newTask); // 🔥 yahi UI update karega
+                    Navigator.pop(context);
                   },
+
                 ),
               ),
             ],
