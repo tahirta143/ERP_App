@@ -15,14 +15,12 @@ class TaskassignstaffProvider with ChangeNotifier {
     _isLoading = true;
     notifyListeners();
 
-    final String response =
-    await rootBundle.loadString('assets/Assigned_task_staff.json');
+    final String response = await rootBundle.loadString('assets/json/Assigned_task_staff.json');
 
     final List data = json.decode(response);
     print(data);
 
-    _assignTask =
-        data.map((e) => AssignTaskStaffModel.fromJson(e)).toList();
+    _assignTask = data.map((e) => AssignTaskStaffModel.fromJson(e)).toList();
 
     _isLoading = false;
     notifyListeners();

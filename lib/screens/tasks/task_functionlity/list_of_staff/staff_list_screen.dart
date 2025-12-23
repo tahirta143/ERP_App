@@ -1,5 +1,9 @@
+import 'package:erp/provider/Task/staff_provider.dart';
 import 'package:erp/screens/tasks/task_functionlity/list_of_staff/add_new_staff.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../Model/Task_model/staff_list_model.dart';
 
 class StaffListScreen extends StatefulWidget {
   const StaffListScreen({super.key});
@@ -12,32 +16,52 @@ class _StaffListScreenState extends State<StaffListScreen> {
   TextEditingController searchController = TextEditingController();
 
   // Dummy staff data
-  List<Map<String, String>> staffList = [
-    {"name": "Ali Khan", "phone": "0301-1234567"},
-    {"name": "Ahmed Raza", "phone": "0302-9876543"},
-    {"name": "Sara Malik", "phone": "0303-4567890"},
-    {"name": "Usman Shah", "phone": "0304-1122334"},
-  ];
+  // List<Map<String, String>> staffList = [
+  //   {"name": "Ali Khan", "phone": "0301-1234567"},
+  //   {"name": "Ahmed Raza", "phone": "0302-9876543"},
+  //   {"name": "Sara Malik", "phone": "0303-4567890"},
+  //   {"name": "Usman Shah", "phone": "0304-1122334"},
+  // ];
 
   List<Map<String, String>> filteredList = [];
 
   @override
+  // void initState() {
+  //   super.initState();
+  //   filteredList = staffList;
+  // }
   void initState() {
+    // TODO: implement initState
     super.initState();
-    filteredList = staffList;
-  }
-
-  void filterStaff(String query) {
-    setState(() {
-      filteredList = staffList
-          .where(
-            (staff) =>
-                staff["name"]!.toLowerCase().contains(query.toLowerCase()) ||
-                staff["phone"]!.contains(query),
-          )
-          .toList();
+    Future.microtask((){
+      context.read<StaffProvider>().getStaffList();
     });
   }
+
+  void filterStaff(
+      String query,
+      List<StaffListModel> staff,
+      ) {
+    setState(() {
+      // filteredList = staff
+      //     .where((task) =>
+      // task.task.toLowerCase().contains(query.toLowerCase()) ||
+      //     task.staff.toLowerCase().contains(query.toLowerCase()))
+      //     .toList();
+    });
+  }
+
+  // void filterStaff(String query) {
+  //   setState(() {
+  //     filteredList = staffList
+  //         .where(
+  //           (staff) =>
+  //               staff["name"]!.toLowerCase().contains(query.toLowerCase()) ||
+  //               staff["phone"]!.contains(query),
+  //         )
+  //         .toList();
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -119,7 +143,7 @@ class _StaffListScreenState extends State<StaffListScreen> {
             // ===== SEARCH BAR =====
             TextField(
               controller: searchController,
-              onChanged: filterStaff,
+             // onChanged: filterStaff,
               decoration: InputDecoration(
                 hintText: "Search staff...",
                 prefixIcon: const Icon(Icons.search),
@@ -136,104 +160,123 @@ class _StaffListScreenState extends State<StaffListScreen> {
 
             // ===== STAFF LIST =====
             Expanded(
-              child: ListView.builder(
-                itemCount: filteredList.length,
-                itemBuilder: (context, index) {
-                  final staff = filteredList[index];
 
-                  return Container(
-                    margin: const EdgeInsets.only(bottom: 12),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(16),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.15),
-                          blurRadius: 6,
-                          offset: const Offset(0, 3),
-                        ),
-                      ],
-                    ),
-                    child: ListTile(
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 8,
-                      ),
-
-                      // ===== NAME =====
-                      title: Text(
-                        staff["name"]!,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-
-                      // ===== PHONE =====
-                      subtitle: Text(
-                        staff["phone"]!,
-                        style: TextStyle(fontSize: 13, color: Colors.grey[600]),
-                      ),
-
-                      // ===== ACTION BUTTONS =====
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Container(
-                            width: 28,
-                            height: 20,
+              child:  Consumer<StaffProvider>(
+                builder: (context, provider,child) {
+                  if (provider.isLoading) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  if (provider.staffList.isEmpty) {
+                    return const Center(child: Text("No Task Found"));
+                  }
+                  return ListView.builder(
+                    itemCount: provider.staffList.length,
+                      itemBuilder: (context, index) {
+                        final staff = provider.staffList[index];
+                        return Container(
+                            margin: const EdgeInsets.only(bottom: 12),
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: Colors.blue.shade100,
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(16),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.15),
+                                  blurRadius: 6,
+                                  offset: const Offset(0, 3),
+                                ),
+                              ],
                             ),
-                            child: IconButton(
-                              padding: EdgeInsets.zero,
-                              constraints: const BoxConstraints(),
-                              icon: const Icon(
-                                Icons.edit,
-                                color: Colors.blue,
-                                size: 18,
+                            child: ListTile(
+                              contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 8,
                               ),
-                              onPressed: () {
-                                // Edit staff
+
+                              // ===== NAME =====
+                              title: Text(
+                                staff.staffName!,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+
+                              // ===== PHONE =====
+                              subtitle: Text(
+                                staff.staffPhone!,
+                                style: TextStyle(fontSize: 13, color: Colors.grey[600]),
+                              ),
+
+                              // ===== ACTION BUTTONS =====
+                              trailing: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Container(
+                                    width: 28,
+                                    height: 20,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: Colors.blue.shade100,
+                                    ),
+                                    child: IconButton(
+                                      padding: EdgeInsets.zero,
+                                      constraints: const BoxConstraints(),
+                                      icon: const Icon(
+                                        Icons.edit,
+                                        color: Colors.blue,
+                                        size: 18,
+                                      ),
+                                      onPressed: () {
+                                        // Edit staff
+                                      },
+                                    ),
+                                  ),
+                                  SizedBox(width: 4),
+                                  const SizedBox(width: 0),
+                                  Container(
+                                    width: 28,
+                                    height: 20,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: Colors.red.shade100,
+                                    ),
+
+                                    child: IconButton(
+                                      padding: EdgeInsets.zero,
+                                      constraints: const BoxConstraints(),
+                                      icon: const Icon(
+                                        Icons.delete,
+                                        color: Colors.red,
+                                        size: 18,
+                                      ),
+                                      onPressed: () {
+                                        // Delete staff
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+
+                              // OPTIONAL: Tap whole tile
+                              onTap: () {
+                                // View staff details
                               },
                             ),
-                          ),
-                          SizedBox(width: 4),
-                          const SizedBox(width: 0),
-                          Container(
-                            width: 28,
-                            height: 20,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: Colors.red.shade100,
-                            ),
+                          );
 
-                            child: IconButton(
-                              padding: EdgeInsets.zero,
-                              constraints: const BoxConstraints(),
-                              icon: const Icon(
-                                Icons.delete,
-                                color: Colors.red,
-                                size: 18,
-                              ),
-                              onPressed: () {
-                                // Delete staff
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-
-                      // OPTIONAL: Tap whole tile
-                      onTap: () {
-                        // View staff details
-                      },
-                    ),
-                  );
-                },
+                      }
+                        );
+                }
               ),
-            ),
+
+              // child: ListView.builder(
+              //   itemCount: filteredList.length,
+              //   itemBuilder: (context, index) {
+              //     final staff = filteredList[index];
+
+                  //
+
+              ),
           ],
         ),
       ),

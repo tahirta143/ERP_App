@@ -1,0 +1,37 @@
+[
+  {
+    "staffId": "001",
+    "staffName": "Shahbaz",
+    "staffAddress": "Model Town Street 4, Lahore",
+    "staffPhone": "03043422355",
+    "staffEmail": "shahbaz@gmail.com"
+  },
+  {
+    "staffId": "002",
+    "staffName": "Gulfam",
+    "staffAddress": "Johar Town Block A, Lahore",
+    "staffPhone": "03011223344",
+    "staffEmail": "gulfam@gmail.com"
+  },
+  {
+    "staffId": "003",
+    "staffName": "Zain",
+    "staffAddress": "Wapda Town Phase 1, Lahore",
+    "staffPhone": "03099887766",
+    "staffEmail": "zain@gmail.com"
+  },
+  {
+    "staffId": "004",
+    "staffName": "Ali",
+    "staffAddress": "Garden Town Near Canal, Lahore",
+    "staffPhone": "03123456789",
+    "staffEmail": "ali@gmail.com"
+  },
+  {
+    "staffId": "005",
+    "staffName": "Usman",
+    "staffAddress": "Iqbal Town Block C, Lahore",
+    "staffPhone": "03214567890",
+    "staffEmail": "usman@gmail.com"
+  }
+]
